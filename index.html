@@ -41,7 +41,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="schedule.html">Schedule</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="learnMore.html">More Info</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -52,14 +54,18 @@
 
 
 
-    <img src="imgs/logo.png" alt="Spinning yankees logo" class="spinning-logo" width="200" height="200" />
+
     <!-- Center‑everything wrapper -->
     <section class="landing-page d-flex flex-column justify-content-center align-items-center text-center text-white">
         <img src="imgs/New_York_Yankees_Primary_Logo.svg" alt="spinning-logo" class="spinning-logo" width="200"
             height="200" />
         <h1 class="display-1 mt-4">Welcome to the New York Yankees</h1>
         <p class="lead mt-3">Come and learn more about the team!!!</p>
-        <button id="learnMoreBtn" class="btn btn-outline-light btn-lg mt-4">Learn More About the Yankees</button>
+        <a href="learnMore.html">
+            <button id="learnMoreBtn" class="btn btn-outline-light btn-lg mt-4">
+                Learn More About the Yankees
+            </button>
+        </a>
     </section>
 
 
@@ -74,7 +80,7 @@
 
     <script>
         document.getElementById('learnMoreBtn').addEventListener('click', () => {
-            const leaf = document.querySelector('.spinning-logo');
+            const logo = document.querySelector('.spinning-logo');
 
             // Add zoom-in animation class
             leaf.classList.add('zoom-in');

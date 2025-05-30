@@ -1,36 +1,85 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById("rosterGrid");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
 
-    const grid = document.getElementById('rosterGrid')
+    if (!grid) return;
 
-    const render = list => {
-        grid.innerHTML = ''
-
-        list.forEach(p => {
-
-            const col = document.createElement('div')
-            col.className = 'col-6 col-lg-2'
+    const render = (list) => {
+        grid.innerHTML = "";
+        list.forEach((p, index) => {
+            const col = document.createElement("div");
+            col.className = "col-6 col-lg-2";
             col.innerHTML = `
-            <div class="card h-100 shadow-sm">
-            <img src="${p.photo}" class="card-img-top" alt="${p.firstName} ${p.lastName}">
-            <div class="card-body text-center">
-                <h5 class="card-title mb-1">
-                    ${p.firstName} ${p.lastName}
-                    </h5>
-            <div class="badge badge-position badge-pos-${p.position}">
-            ${p.position}
-            </div>
-            <p class="small text-muted mb-0">
-            Age ${p.age}
-            </p>
-            </div>
-            </div>
-            `
+        <div class="card h-100 shadow-sm">
+          <img src="${p.photo}" class="card-img-top" alt="${p.firstName} ${p.lastName
+                }">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-1">${p.firstName} ${p.lastName}</h5>
+            <div class="badge badge-position badge-pos-${p.position}">${p.position
+                }</div>
+            <p class="small text-muted mb-0">Age ${p.age}</p>
+            
+             <button class="btn btn-sm btn-primary show-info-btn" data-player-index="${index}" data-bs-toggle="modal" data-bs-target="#playerModal">
+            More Info
+          </button>
 
-            grid.appendChild(col)
-        })
+            <div id="moreInfo-${index}" class="collapse mt-2">
+              <p class="small">Fun Fact: ${p.funFact || "Loves the game!"}</p>
+            </div>
+          </div>
+        </div>
+      `;
+            grid.appendChild(col);
+        });
+    };
 
+    // const applyFilters = () => {
+    //     const term = searchInput.value.trim().toLowerCase();
+    //     let filtered = players.filter((p) =>
+    //         `${p.firstName} ${p.lastName}`.toLowerCase().includes(term)
+    //     );
 
+    //     const [key, dir] = sortSelect.value.split("-");
+    //     filtered.sort((a, b) => {
+    //         if (key === "age") {
+    //             return dir === "asc" ? a.age - b.age : b.age - a.age;
+    //         }
+    //         const A = (
+    //             key === "firstName"
+    //                 ? a.firstName
+    //                 : key === "lastName"
+    //                     ? a.lastName
+    //                     : a.position
+    //         ).toLowerCase();
+    //         const B = (
+    //             key === "firstName"
+    //                 ? b.firstName
+    //                 : key === "lastName"
+    //                     ? b.lastName
+    //                     : b.position
+    //         ).toLowerCase();
+    //         return dir === "asc" ? A.localeCompare(B) : B.localeCompare(A);
+    //     });
+
+    //     render(filtered);
+    // };
+
+    // searchInput.addEventListener("input", applyFilters);
+    // sortSelect.addEventListener("change", applyFilters);
+
+    render(players);
+    grid.addEventListener('click', function (e) {
+        if (e.target.classList.contains('show-info-btn')) {
+            const index = e.target.getAttribute('data-player-index')
+            const player = players[index]
+            showPlayerModal(player)
+        }
+    })
+    function showPlayerModal(player) {
+        document.getElementById('modalPhoto').src = player.photo
+        document.getElementById('modalName').textContent = `${player.firstName} ${player.lastName}`
+        document.getElementById('modalPosition').textContent = player.position
+        document.getElementById('modalAge').textContent = player.age
     }
-
-    render(players)
-})
+});

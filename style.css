@@ -1,3 +1,19 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  background: #002468 
+}
+
+/* Landing page container */
+.landing-page {
+  height: calc(100vh - 56px - 48px); /* Full viewport minus navbar and footer */
+  padding: 2rem;
+}
+
+
+
 .navbar {
     background-color: var(black) !important;
     padding-block: 0.35rem !important;
@@ -31,7 +47,7 @@
   }
   
   /* Logo pop‑in */
-  #landing-logo {
+  #spinning-logo {
     width: clamp(120px, 25vw, 240px);
     height: auto;
     animation: popIn 0.9s ease-out;
@@ -82,4 +98,6 @@
   .badge-pos-OF  { background: #ef06a5; } 
   
   @media (min-width: 992px) { #rosterGrid .col-lg-2 { flex: 0 0 20%; max-width: 20%; } }
+  
+
   
